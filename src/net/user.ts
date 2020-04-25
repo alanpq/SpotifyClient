@@ -67,23 +67,23 @@ export async function getUser(token: string) {
 
   return await fetch("https://api.spotify.com/v1/me", requestOptions)
     .then ((response: any) => response.json())
-    // .then ((result: any)   => {
-    //   // const usr: User = {
-    //   //   birthdate: new Date(result.birthdate),
-    //   //   country: result.country,
-    //   //   displayName: result.display_name,
-    //   //   email: result.email,
-    //   //   explicitContent: result.explicit_content,
-    //   //   externalURLS: result.external_urls,
-    //   //   followers: result.followers,
-    //   //   href: result.href,
-    //   //   id: result.id,
-    //   //   images: result.images,
-    //   //   product: result.product,
-    //   //   showsCollection: result.shows_collection,
-    //   //   uri: result.uri,
-    //   // };
-    //   return result;
-    // })
+    .then ((result: any)   => {
+      const usr: User = {
+        birthdate: new Date(result.birthdate),
+        country: result.country,
+        displayName: result.display_name,
+        email: result.email,
+        explicitContent: result.explicit_content,
+        externalURLS: result.external_urls,
+        followers: result.followers,
+        href: result.href,
+        id: result.id,
+        images: result.images,
+        product: result.product,
+        showsCollection: result.shows_collection,
+        uri: result.uri,
+      };
+      return usr;
+    })
     .catch((error: any)    => console.log("error", error));
 }

@@ -2,25 +2,30 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { HashRouter as Router, Route } from "react-router-dom";
+import { createWindow } from "./login";
+import { User } from "./net/user";
+
+import "./style.sass";
 
 interface IProfileProps {
-  user?: object;
+  user?: User;
 }
+
+let user: User;
 
 class Profile extends React.Component<IProfileProps> {
   public render() {
-    if(this.props.user) {
+    if (user) {
       return (
-        <a>
-          <img src="https://via.placeholder.com/32"></img>
-          <span>Anonymous</span>
+        <a className="profile">
+          <img src={user.images[0].url}></img>
+          <span>{user.displayName}</span>
         </a>
       );
     } else {
       return (
-        <a>
-          <img src="https://via.placeholder.com/32"></img>
-          <span>Anonymous</span>
+        <a onClick={() => {createWindow((usr: User) => {user = usr; draw(); }); } }>
+          Log in
         </a>
       );
     }
@@ -58,4 +63,8 @@ class Index extends React.Component {
     }
 }
 
-ReactDOM.render(<Index />, document.getElementById("app"));
+const draw = () => {
+  ReactDOM.render(<Index />, document.getElementById("app"));
+};
+
+draw();
