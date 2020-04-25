@@ -3,14 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <script src="./dist/renderer.bundle.js" defer></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    logged in as <span class="txt_displayName"></span>
-
-    <button id="loginBtn">login</button>
-
-    <!-- You can also require other files to run in this process -->
-    <script src="./dist/renderer.bundle.js"></script>
+    <header>
+      <nav>
+        <a class="profile">
+          <img src="" class="avatar" />
+          <span class="txt_displayName">Anonymous</span>
+        </a>
+      </nav>
+    </header>
+    <main>
+      <button id="loginBtn">Login</button>
+    </main>
   </body>
 </html>
