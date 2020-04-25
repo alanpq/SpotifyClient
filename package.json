@@ -1,0 +1,27 @@
+{
+  "name": "spotifyclient",
+  "version": "1.0.0",
+  "description": "Spotify Client",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oofsauce/SpotifyClient.git"
+  },
+  "keywords": [
+    "spotify",
+    "electron"
+  ],
+  "author": "Alan Panayotov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oofsauce/SpotifyClient/issues"
+  },
+  "homepage": "https://github.com/oofsauce/SpotifyClient#readme",
+  "devDependencies": {
+    "electron": "^8.2.3"
+  }
+}
