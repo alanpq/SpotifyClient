@@ -1,27 +1,41 @@
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-	watch: false,
-	target: 'electron-renderer',
-	mode: 'development',
-	devtool: 'inline-source-map',
-	entry: {
-		renderer: `./src/renderer/renderer.ts`
-		// view: `./src/renderer/views/index.pug`
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].bundle.js'
-	},
-	resolve: {
-		// Add `.ts` and `.tsx` as a resolvable extension.
-		extensions: [".ts", ".tsx", ".js"]
-	},
-	module: {
-		rules: [
-			// all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-			{ test: /\.tsx?$/, loader: "ts-loader" },
-			{ test: /\.pug?$/, loader: "pug-loader" },
-		]
-	}
-};
+module.exports = [
+	{
+    mode: 'development',
+    entry: './src/main.ts',
+    target: 'electron-main',
+    module: {
+      rules: [{
+        test: /\.ts$/,
+        include: /src/,
+        use: [{ loader: 'ts-loader' }]
+      }]
+    },
+    output: {
+      path: __dirname + '/dist',
+      filename: 'main.js'
+    }
+  },
+  {
+    mode: 'development',
+    entry: './src/react.tsx',
+    target: 'electron-renderer',
+    devtool: 'source-map',
+    module: { rules: [{
+      test: /\.ts(x?)$/,
+      include: /src/,
+      use: [{ loader: 'ts-loader' }]
+    }] },
+    output: {
+      path: __dirname + '/dist',
+      filename: 'react.js'
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html'
+      })
+    ]
+  }
+];
