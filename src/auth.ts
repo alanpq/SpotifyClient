@@ -1,8 +1,10 @@
-import {Console} from "console";
+import { Console } from "console";
 
-import {setAuth} from "./net/user";
+import { setAuth } from "./net/user";
 
 const con = new Console(process.stdout, process.stderr);
+
+export let token: string;
 
 async function getToken(cookie: string) {
   const headers = new Headers();
@@ -33,10 +35,11 @@ async function getToken(cookie: string) {
     .then((response: any) => response.json())
     .then((result: any) => {
       con.log("Got access token.");
+      token = result.accessToken;
       con.log(result);
       setAuth(result);
     })
     .catch((error: any) => con.log("error", error));
 }
 
-export {getToken};
+export { getToken };
