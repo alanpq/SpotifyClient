@@ -2,38 +2,31 @@ import { app, BrowserWindow } from "electron";
 import * as path from "path";
 let mainWindow: Electron.BrowserWindow;
 
+import * as fs from "fs";
+fs.writeFileSync(path.resolve(__dirname, "bruh.txt"), "sup");
+
 function createWindow() {
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
-    height: 600,
+    backgroundColor: "#121212",
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     },
-    width: 800,
+    width: 1000,
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile(path.resolve(__dirname, "index.html"));
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
-  // Emitted when the window is closed.
   mainWindow.on("closed", () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
 
-// Quit when all windows are closed.
 app.on("window-all-closed", () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
@@ -49,6 +42,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
