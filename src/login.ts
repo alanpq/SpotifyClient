@@ -1,7 +1,7 @@
 // tslint:disable: object-literal-sort-keys
-import {Console} from "console";
+import { Console } from "console";
 import { app, BrowserView, BrowserWindow, remote } from "electron";
-import {getToken} from "./auth";
+import { getToken } from "./auth";
 import { auth, getUser } from "./net/user";
 
 export let loginWindow: BrowserWindow;
@@ -11,7 +11,7 @@ export let accessToken: string;
 
 const con = new Console(process.stdout, process.stderr);
 
-async function createWindow(cb: any) {
+async function createWindow(cb: any) { // TODO: get rid of this forsaken callback
   loginWindow = new remote.BrowserWindow({
     autoHideMenuBar: true,
     parent: remote.getCurrentWindow(),
@@ -30,9 +30,9 @@ async function createWindow(cb: any) {
       loginWindow = null;
       // con.log(v);
       getToken(v)
-        .then( async () => cb(await getUser(auth.accessToken)) );
+        .then(async () => cb(await getUser(auth.accessToken)));
     });
   });
 }
 
-export {createWindow};
+export { createWindow };
